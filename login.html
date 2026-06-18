@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SPEventsPro Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:
+linear-gradient(
+rgba(0,0,0,.55),
+rgba(0,0,0,.55)
+),
+url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1600');
+
+background-size:cover;
+background-position:center;
+}
+
+.login-container{
+width:90%;
+max-width:450px;
+
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(15px);
+
+padding:35px;
+border-radius:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.3);
+
+color:white;
+}
+
+.login-container h1{
+text-align:center;
+margin-bottom:25px;
+}
+
+.input-group{
+margin-bottom:18px;
+}
+
+.input-group label{
+display:block;
+margin-bottom:6px;
+font-weight:500;
+}
+
+.input-group input{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+outline:none;
+font-size:15px;
+}
+
+.password-box{
+position:relative;
+}
+
+.password-box button{
+position:absolute;
+right:10px;
+top:50%;
+transform:translateY(-50%);
+border:none;
+background:none;
+cursor:pointer;
+font-size:16px;
+}
+
+.options{
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-size:14px;
+margin-bottom:20px;
+}
+
+.options a{
+color:#ffd700;
+text-decoration:none;
+}
+
+.login-btn{
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+
+background:#ff4d6d;
+color:white;
+transition:.3s;
+}
+
+.login-btn:hover{
+background:#ff1f4b;
+}
+
+.home-btn{
+display:block;
+text-align:center;
+margin-top:15px;
+color:white;
+text-decoration:none;
+}
+
+.error{
+color:#ffb3b3;
+font-size:14px;
+margin-bottom:15px;
+display:none;
+}
+
+@media(max-width:500px){
+
+.login-container{
+padding:25px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+<h1>🎉 SP EventsPro Login</h1>
+
+<p class="error" id="errorMsg">
+Invalid credentials. Please try again.
+</p>
+
+<form id="loginForm">
+
+<div class="input-group">
+
+<label>Username</label>
+
+<input
+type="text"
+id="username"
+placeholder="Enter Username"
+required>
+
+</div>
+
+<div class="input-group">
+
+<label>Email</label>
+
+<input
+type="email"
+id="email"
+placeholder="Enter Email"
+required>
+
+</div>
+
+<div class="input-group">
+
+<label>Password</label>
+
+<div class="password-box">
+
+<input
+type="password"
+id="password"
+placeholder="Enter Password"
+required>
+
+<button
+type="button"
+onclick="togglePassword()">
+👁️
+</button>
+
+</div>
+
+</div>
+
+<div class="options">
+
+<label>
+<input type="checkbox" id="remember">
+ Remember Me
+</label>
+
+<a href="#">
+Forgot Password?
+</a>
+
+</div>
+
+<button class="login-btn" type="submit">
+Login
+</button>
+
+</form>
+
+<a href="index.html" class="home-btn">
+⬅ Back to Home
+</a>
+
+</div>
+
+<script>
+
+// SHOW PASSWORD
+
+function togglePassword(){
+
+const password =
+document.getElementById("password");
+
+if(password.type==="password"){
+
+password.type="text";
+
+}else{
+
+password.type="password";
+
+}
+
+}
+
+// LOGIN VALIDATION
+
+document
+.getElementById("loginForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const username =
+document.getElementById("username").value;
+
+const email =
+document.getElementById("email").value;
+
+const password =
+document.getElementById("password").value;
+
+const errorMsg =
+document.getElementById("errorMsg");
+
+if(
+username.length >= 3 &&
+email.includes("@") &&
+password.length >= 6
+){
+
+// Save user data
+
+localStorage.setItem(
+"eventUser",
+username
+);
+
+localStorage.setItem(
+"userEmail",
+email
+);
+
+// Remember Me
+
+if(document.getElementById("remember").checked){
+
+localStorage.setItem(
+"rememberUser",
+"true"
+);
+
+}
+
+// Redirect
+
+window.location.href=
+"dashboard.html";
+
+}
+else{
+
+errorMsg.style.display="block";
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
